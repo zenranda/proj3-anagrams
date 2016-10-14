@@ -90,7 +90,7 @@ def check():
   in_jumble = LetterBag(jumble).contains(text)
   matched = WORDS.has(text)
 
-  rez = {"key" : ''}
+  rez = {"key" : ''}      #result dict, is what's sent to the html
   ## Respond appropriately 
   if matched and in_jumble and not (text in matches):
   	## Cool, they found a new word

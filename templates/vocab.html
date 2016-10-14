@@ -88,28 +88,43 @@
   </form>
 </div></div>
 
-<br />
+<p id="output"> </p> 
 
-{% if session.matches|length is not equalto 0  %}
-<h2>You found </h2>
-<p id="results">
-  {% for match in session.matches %}
-  {{ match }} 
-  {% endfor %}
-</p>
-{% endif %}
+<script>
 
+//function handlers, logic here largely recycled from minijax.py
+$("#entry").submit( function(event) {
+   event.preventDefault();
+});
+  
+  
+$("#attempt").keyup(function(event) {
+   var txt = $("#attempt").val();  //input 
+   var keycode = event.which;
+   var letter = String.fromCharCode(keycode);
+   if (! "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(letter)) { return } //check if keystroke is a letter
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <!-- Mismatch, already found, etc. "flashed" from Python -->
-    {% for message in messages %}
-      <p class="message">{{ message }}</p>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+	//if the word matches, print it, clear the attempt, and ask for more
+	//...unless the user has finished, in which case it changes to the victory page
+   $.getJSON( "/_check", { text: txt }, 
+                function(data) {
+                word = data.result.key;
+                console.log("word: " + word)
+                
+                if (word == 'STOP'){
+                  window.location.replace("/success");
+                  }
+                
+                else if ( word != '' ){
+                  $("#output").append(word);
+                  $("#output").append("\n");
+                  $("#attempt").val("");
+                }
+              }
+           );
+   } );
 
-
-
- </div> <!-- container -->
-</body> </html>
+</script>
+</div> <!-- container -->
+</body> 
+</html>

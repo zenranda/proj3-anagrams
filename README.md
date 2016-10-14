@@ -1,42 +1,30 @@
-# proj3-anagrams
-Vocabularly anagrams game for primary school English language learners (ELL)
+# README #
+
+###CS322 Project 3: Ajax Vocabulary Game###
+###Author: Marc Leppold###
+
+##Project Notes
+
+The third project of CS322. An online vocabulary game designed for elementary school students. Creates a list of words, shows the user a bunch of random letters, then asks them to construct 3 of the shown words with their letters. In short, they're prompted to find anagrams. The user can freely enter the letters into a dynamic field that automatically checks if they construct a word, no need to submit the letters manually.
+
+Once three words have been completed, the game goes to a victory screen and prompts the user to play again. Though scalable to large, random sets of words and letters, it's currently configured to give the same words each time. Systems are in place to ensure the user can construct at least 3 words.
+
+Utilizes ajax, but also click, Flask, guincorn, itsdangerous, Jinja2, MarkupSafe, nose and Werkzeug. All of them are supplied with the configure script.
 
 
-## Overview
+### USAGE ###
 
-A simple anagram game designed for English-language learning students in 
-elementary and middle school.  
-Students are presented with a list of vocabulary words (taken from a text file) 
-and an anagram.  The anagram is a jumble of some number of vocabulary words, randomly chosen.  Students attempt to type vocabularly words that can be created from the  
-jumble.  When a matching word is typed, it is added to a list of solved words. 
+Execute flask_vocab.py, then enter 
+```
+HOST:PORT
+```
+into an internet browser, where HOST matches the IP address of the host computer and PORT matches the port the server is running on (default 5000). Note that there are various dependancies that will likely require executing the configure script first, notably Flask and Jinja2.
 
-The vocabulary word list is fixed for one invocation of the server, so multiple
-students connected to the same server will see the same vocabulary list but may 
-have different anagrams.
-
-## Authors 
-
-Initial version by M Young; to be revised by CIS 322 students. 
-
-## Status
-
-flask_vocab.py and the template vocab.html are a 'skeleton' version 
-of the anagram game for a CIS 322 project.  They uses conventional  
-interaction through a form, interacting only when the user submits the form. 
-Your assignment is to replace the interaction with AJAX interaction on each 
-keystroke. 
-
-## Minijax? 
-
-flask_minijax.py and templates/minijax.html are a tiny example of using JQuery 
-with flask for an Ajax application.  They should not be included in the
-version of the project you turn in. 
-
-
-## To run automated tests 
-* `nosetests`
-
-There are currently nose tests for vocab.py, letterbag.py, and jumble.py. 
-
-
-
+Can be executed via automated configure and makefile scripts as well:
+```
+git clone https://github.com/zenranda/proj3-anagrams InstallDirectory
+cd InstallDirectory
+make configure
+make run
+```
+where InstallDirectory is the directory you cloned the files to.
